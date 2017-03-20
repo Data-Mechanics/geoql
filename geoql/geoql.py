@@ -6,7 +6,7 @@
 ##   emphasis on support for abstract graph representations).
 ##
 ##   Web:     github.com/data-mechanics/geoql
-##   Version: 0.0.1.0
+##   Version: 0.0.3.0
 ##
 ##
 
