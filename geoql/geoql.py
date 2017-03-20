@@ -115,12 +115,4 @@ def features_node_edge_graph(obj):
     obj['features'] = features
     return obj
 
-def geoql(obj):
-    obj.features_properties_null_remove = features_properties_null_remove.__get__(obj)
-    obj.features_tags_parse_str_to_dict = features_tags_parse_str_to_dict.__get__(obj)
-    obj.features_keep_by_property = features_keep_by_property.__get__(obj)
-    obj.features_keep_within_radius = features_keep_within_radius.__get__(obj)
-    obj.features_node_edge_graph = features_node_edge_graph.__get__(obj)
-    return obj
-
 ## eof
