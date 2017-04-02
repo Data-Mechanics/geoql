@@ -20,13 +20,14 @@ An example of usage is provided  below:
     import geoleaflet
     import requests
 
-    url = 'https://raw.githubusercontent.com/Data-Mechanics/geoql/master/examples/example_extract.geojson'
-    response = requests.get(url)
-    g = geojson.loads(response.text, encoding="latin-1")
+    url = 'https://raw.githubusercontent.com/Data-Mechanics/geoql/master/examples/'
+    z = geojson.loads(requests.get(url + 'example_zips.geojson').text, encoding="latin-1")
+    g = geojson.loads(requests.get(url + 'example_extract.geojson').text, encoding="latin-1")
     g = geoql.features_properties_null_remove(g)
     g = geoql.features_tags_parse_str_to_dict(g)
     g = geoql.features_keep_by_property(g, {"highway": {"$in": ["residential", "secondary", "tertiary"]}})
-    g = geoql.features_keep_within_radius(g, (42.3551, -71.0656), 1, 'miles')
+    g = geoql.features_keep_within_radius(g, (42.3551, -71.0656), 0.75, 'miles')
+    g = geoql.features_keep_intersecting_features(g, z)
     g = geoql.features_node_edge_graph(g)
     open('example_extract.geojson', 'w').write(geojson.dumps(g))
     open('leaflet.html', 'w').write(geoleaflet.html(g)) # Create visualization.
