@@ -20,7 +20,8 @@ An example of usage is provided  below:
     import geoleaflet
     import requests
 
-    response = requests.get('https://raw.githubusercontent.com/Data-Mechanics/geoql/master/examples/example_extract.geojson')
+    url = 'https://raw.githubusercontent.com/Data-Mechanics/geoql/master/examples/example_extract.geojson'
+    response = requests.get(url)
     g = geojson.loads(response.text, encoding="latin-1")
     g = geoql.features_properties_null_remove(g)
     g = geoql.features_tags_parse_str_to_dict(g)
