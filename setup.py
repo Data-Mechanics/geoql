@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name             = 'geoql',
-    version          = '0.0.4.0',
+    version          = '0.0.5.0',
     packages         = ['geoql',],
     install_requires = ['geojson', 'geopy', 'rtree', 'shapely', 'tqdm',],
     license          = 'MIT License',
@@ -10,5 +10,5 @@ setup(
 	author           = 'Andrei Lapets',
 	author_email     = 'a@lapets.io',
     description      = 'Library for performing queries and transformations on GeoJSON data (with emphasis on support for abstract graph representations).',
-    long_description = open('README.md').read(),
+    long_description = open('README').read(),
 )
