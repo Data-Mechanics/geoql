@@ -30,7 +30,10 @@ class GeoQLError(Exception):
     def __str__(self):
         return repr(self.value)
 
-def match(value, query):        
+def match(value, query):
+    """
+    Determine whether a value satisfies a query.
+    """
     if type(query) in [str, int, float, type(None)]:
         return value == query
     elif type(query) == dict and len(query.keys()) == 1:
@@ -48,6 +51,10 @@ def match(value, query):
         raise GeoQLError("Not a valid query: " + str(query))
 
 def features_properties_null_remove(obj):
+    """
+    Remove any properties of features in the collection that have 
+    entries mapping to a null (i.e., None) value
+    """
     features = obj['features']
     for i in tqdm(range(len(features))):
         if 'properties' in features[i]:
@@ -56,6 +63,10 @@ def features_properties_null_remove(obj):
     return obj
 
 def features_tags_parse_str_to_dict(obj):
+    """
+    Parse tag strings of all features in the collection into a Python
+    dictionary, if possible.
+    """
     features = obj['features']
     for i in tqdm(range(len(features))):
         tags = features[i]['properties'].get('tags')
@@ -74,6 +85,10 @@ def features_tags_parse_str_to_dict(obj):
     return obj
 
 def features_keep_by_property(obj, query):
+    """
+    Filter all features in a collection by retaining only those that
+    satisfy the provided query.
+    """
     features_keep = []
     for feature in tqdm(obj['features']):
         if all([match(feature['properties'].get(prop), qry) for (prop, qry) in query.items()]):
@@ -82,6 +97,10 @@ def features_keep_by_property(obj, query):
     return obj
 
 def features_keep_within_radius(obj, center, radius, units):
+    """
+    Filter all features in a collection by retaining only those that
+    fall within the specified radius.
+    """
     features_keep = []
     for feature in tqdm(obj['features']):
         if all([getattr(geopy.distance.vincenty((lat,lon), center), units) < radius for (lon,lat) in geojson.utils.coords(feature)]):
@@ -90,6 +109,10 @@ def features_keep_within_radius(obj, center, radius, units):
     return obj
 
 def features_keep_using_features(obj, bounds):
+    """
+    Filter all features in a collection by retaining only those that
+    fall within the features in the second collection.
+    """
     # Build an R-tree index of bound features and their shapes.
     bounds_shapes = [
         (feature, shapely.geometry.shape(feature['geometry'])) 
@@ -117,9 +140,18 @@ def features_keep_using_features(obj, bounds):
     return obj
 
 def features_keep_intersecting_features(obj, bounds):
+    """
+    Filter all features in a collection by retaining only those that
+    fall within the features in the second collection.
+    """
     return features_keep_using_features(obj, bounds)
 
 def features_node_edge_graph(obj):
+    """
+    Transform the features into a more graph-like structure by
+    appropriately splitting LineString features into two-point
+    "edges" that connect Point "nodes".
+    """
     points = {}
     features = obj['features']
     for feature in tqdm(obj['features']):
