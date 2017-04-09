@@ -147,4 +147,42 @@ def features_node_edge_graph(obj):
     obj['features'] = features
     return obj
 
+class geoql(geojson.feature.FeatureCollection):
+    """
+    Represents a queryable FeatureCollection, a collection of multiple
+    Feature objects that support geoql query methods.
+    """
+
+    def __init__(self, feature_collection, **extra):
+        """
+        Initialises a geoql object given a FeatureCollection.
+        :param feature_collection: FeatureCollection object.
+        :type feature_collection: FeatureCollection
+        :return: geoql object
+        :rtype: geoql
+        """
+        super(geojson.feature.FeatureCollection, self).__init__(**extra)
+        self["features"] = feature_collection["features"]
+
+    def properties_null_remove(self):
+        return features_properties_null_remove(self)
+
+    def tags_parse_str_to_dict(self):
+        return features_tags_parse_str_to_dict(self)
+
+    def keep_by_property(self, query):
+        return features_keep_by_property(self, query)
+
+    def keep_within_radius(self, center, radius, units):
+        return features_keep_within_radius(self, center, radius, units)
+
+    def keep_using_features(self, bounds):
+        return features_keep_using_features(self, bounds)
+
+    def keep_that_intersect(self, bounds):
+        return features_keep_intersecting_features(self, bounds)
+
+    def node_edge_graph(self):
+        return features_node_edge_graph(self)
+
 ## eof
