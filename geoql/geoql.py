@@ -6,7 +6,7 @@
 ##   emphasis on support for abstract graph representations).
 ##
 ##   Web:     github.com/data-mechanics/geoql
-##   Version: 0.0.5.0
+##   Version: 0.0.6.0
 ##
 ##
 
@@ -50,8 +50,9 @@ def match(value, query):
 def features_properties_null_remove(obj):
     features = obj['features']
     for i in tqdm(range(len(features))):
-        properties = features[i]['properties']
-        features[i]['properties'] = {p:properties[p] for p in properties if properties[p] is not None}
+        if 'properties' in features[i]:
+            properties = features[i]['properties']
+            features[i]['properties'] = {p:properties[p] for p in properties if properties[p] is not None}
     return obj
 
 def features_tags_parse_str_to_dict(obj):
@@ -153,6 +154,28 @@ class geoql(geojson.feature.FeatureCollection):
     Feature objects that support geoql query methods.
     """
 
+    @staticmethod
+    def load(fp,
+             cls=json.JSONDecoder,
+             parse_constant=geojson.codec._enforce_strict_numbers,
+             object_hook=geojson.base.GeoJSON.to_instance,
+             **kwargs):
+        return geoql(json.load(fp,
+                         cls=cls, object_hook=object_hook,
+                         parse_constant=parse_constant,
+                         **kwargs))
+
+    @staticmethod
+    def loads(s,
+              cls=json.JSONDecoder,
+              parse_constant=geojson.codec._enforce_strict_numbers,
+              object_hook=geojson.base.GeoJSON.to_instance,
+              **kwargs):
+        return geoql(json.loads(s,
+                          cls=cls, object_hook=object_hook,
+                          parse_constant=parse_constant,
+                          **kwargs))
+
     def __init__(self, feature_collection, **extra):
         """
         Initialises a geoql object given a FeatureCollection.
@@ -184,5 +207,11 @@ class geoql(geojson.feature.FeatureCollection):
 
     def node_edge_graph(self):
         return features_node_edge_graph(self)
+        
+    def dump(self, fp, cls=geojson.codec.GeoJSONEncoder, allow_nan=False, **kwargs):
+        return geojson.dump(self, fp, cls=cls, allow_nan=allow_nan, **kwargs)
+
+    def dumps(self, cls=geojson.codec.GeoJSONEncoder, allow_nan=False, **kwargs):
+        return geojson.dumps(self, cls=cls, allow_nan=allow_nan, **kwargs)
 
 ## eof
