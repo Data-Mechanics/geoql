@@ -1,20 +1,25 @@
-# geoql
+=====
+geoql
+=====
 
 Library for performing queries and transformations on GeoJSON data (with emphasis on support for abstract graph representations).
 
 Package Installation and Usage
 ------------------------------
 
-The package is available on PyPI:
+The package is available on PyPI::
 
     python -m pip install geoql
 
-The library can be imported in the usual ways:
+The library can be imported in the usual ways::
 
     import geoql
     from geoql import geoql
 
-An example of usage is provided  below:
+Examples
+--------
+
+An example of usage is provided  below::
 
     import geojson
     from geoql import geoql
@@ -38,7 +43,7 @@ An example of usage is provided  below:
     g.dump(open('example_extract.geojson', 'w'))
     open('leaflet.html', 'w').write(geoleaflet.html(g)) # Create visualization.
 
-An alternative example of usage is provided  below (the below usage is deprecated but will remain supported):
+An alternative example of usage is provided  below (the below usage is deprecated but will remain supported)::
 
     import geojson
     import geoql
