@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name             = 'geoql',
-    version          = '0.0.6.0',
+    version          = '0.0.7.0',
     packages         = ['geoql',],
     install_requires = ['geojson', 'geopy', 'rtree', 'shapely', 'tqdm',],
     license          = 'MIT',

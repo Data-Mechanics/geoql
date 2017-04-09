@@ -1,6 +1,6 @@
 # Ensure that common library functions are available when the
 # module is loaded.
-from geoql.geoql import geoql, load, laods
+from geoql.geoql import geoql
 
 # The following are primarily for backwards compatibility.
 from geoql.geoql import features_properties_null_remove
