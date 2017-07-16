@@ -6,7 +6,7 @@
 ##   emphasis on support for abstract graph representations).
 ##
 ##   Web:     github.com/data-mechanics/geoql
-##   Version: 0.0.7.0
+##   Version: 0.0.8.0
 ##
 ##
 
@@ -21,10 +21,10 @@ from tqdm import tqdm
 ###############################################################################
 ##
 
-"""
-A GeoQL error is a general-purpose catch-all for any usage error.
-"""
 class GeoQLError(Exception):
+    """
+    A GeoQL error is a general-purpose catch-all for any usage error.
+    """
     def __init__(self, value):
         self.value = value
     def __str__(self):

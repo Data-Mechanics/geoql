@@ -18,7 +18,6 @@ The library can be imported in the usual ways::
 
 Examples
 --------
-
 An example of usage is provided  below::
 
     import geojson
