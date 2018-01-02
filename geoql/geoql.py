@@ -1,12 +1,10 @@
 ###############################################################################
 ## 
 ## geoql.py
+## https://github.com/data-mechanics/geoql
 ##
-##   Library for performing queries and transformations on GeoJSON data (with
-##   emphasis on support for abstract graph representations).
-##
-##   Web:     github.com/data-mechanics/geoql
-##   Version: 0.0.8.0
+## Library for performing queries and transformations on GeoJSON data (with
+## emphasis on support for abstract graph representations).
 ##
 ##
 
