@@ -4,6 +4,10 @@ geoql
 
 Library for performing queries and transformations on GeoJSON data (with emphasis on support for abstract graph representations).
 
+.. image:: https://badge.fury.io/py/geoql.svg
+   :target: https://badge.fury.io/py/geoql
+   :alt: PyPI version and link.
+
 Package Installation and Usage
 ------------------------------
 
